@@ -1,0 +1,40 @@
+{% block content %}
+  <h2>Resolutions</h2>
+  <form method="POST" action="{% url 'resolutions:personal_list' %}">
+    {% csrf_token %}
+    <table>
+      <tr>
+        <th>Role / Resolution</th>
+        <th>Include</th>
+      </tr>
+      {% for role_with_resolutions in roles_with_resolutions %}
+        <tr class="role-row" data-role-id="{{ role_with_resolutions.role.id }}">
+          <td>{{ role_with_resolutions.role.name }}</td>
+          <td>
+            <input type="checkbox" class="role-checkbox" name="include_role" value="{{ role_with_resolutions.role.id }}" checked>
+          </td>
+        </tr>
+        {% for resolution in role_with_resolutions.resolutions %}
+          <tr class="resolution-row" data-role-id="{{ role_with_resolutions.role.id }}">
+            <td>{{ resolution.positive_action }}</td>
+            <td>
+              <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}" checked>
+            </td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+    <button type="submit" id="print-button">Print</button>
+  </form>
+
+  <script>
+    document.querySelectorAll('.role-checkbox').forEach(function(roleCheckbox) {
+      roleCheckbox.addEventListener('change', function() {
+        var roleId = this.closest('.role-row').dataset.roleId;
+        document.querySelectorAll('.resolution-row[data-role-id="' + roleId + '"] .resolution-checkbox').forEach(function(resolutionCheckbox) {
+          resolutionCheckbox.checked = roleCheckbox.checked;
+        });
+      });
+    });
+  </script>
+{% endblock %}
