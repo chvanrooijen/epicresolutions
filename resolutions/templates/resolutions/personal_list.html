@@ -1,18 +1,30 @@
-{% block content %}
-  <h2>Personal list</h2>
-
-  {% for role in roles %}
-    <h3>{{ role.name }}</h3>
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'resolutions/css/style.css' %}">
+</head>
+<body>
+  {% block content %}
+    <h2>Personal list</h2>
+  
     <table>
-      {% for resolution in resolutions %}
-        {% if resolution.role.id == role.id %}
-          <tr>
-            <td>{{ resolution.positive_action }}</td>
-          </tr>
-        {% endif %}
+      <tr>
+        <th class="primary">Role / Resolution</th>
+      </tr>
+      {% for role in roles %}
+        <tr>
+          <th class="secondary">{{ role.name }}</th>
+        </tr>
+        {% for resolution in resolutions %}
+          {% if resolution.role.id == role.id %}
+            <tr>
+              <td class="secondary">{{ resolution.positive_action }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
       {% endfor %}
     </table>
-  {% empty %}
-    <p>No roles or resolutions included.</p>
-  {% endfor %}
-{% endblock %}
+  {% endblock %}
+</body>
+</html>

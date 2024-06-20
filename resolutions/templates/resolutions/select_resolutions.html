@@ -1,22 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'resolutions/css/style.css' %}">
+</head>
+<body>
 {% block content %}
-  <h2>Resolutions</h2>
   <form method="POST" action="{% url 'resolutions:personal_list' %}">
     {% csrf_token %}
+    <label for="form-id">Select the roles and resolutions you want to include on your personal list:</label>
     <table>
       <tr>
-        <th>Role / Resolution</th>
-        <th>Include</th>
+        <th class="primary">Role / Resolution</th>
+        <th class="primary">Include</th>
       </tr>
       {% for role_with_resolutions in roles_with_resolutions %}
         <tr class="role-row" data-role-id="{{ role_with_resolutions.role.id }}">
-          <td>{{ role_with_resolutions.role.name }}</td>
+          <th class="secondary">{{ role_with_resolutions.role.name }}</th>
           <td>
             <input type="checkbox" class="role-checkbox" name="include_role" value="{{ role_with_resolutions.role.id }}" checked>
           </td>
         </tr>
         {% for resolution in role_with_resolutions.resolutions %}
           <tr class="resolution-row" data-role-id="{{ role_with_resolutions.role.id }}">
-            <td>{{ resolution.positive_action }}</td>
+            <td class="secondary">{{ resolution.positive_action }}</td>
             <td>
               <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}" checked>
             </td>
@@ -24,7 +31,7 @@
         {% endfor %}
       {% endfor %}
     </table>
-    <button type="submit" id="print-button">Print</button>
+    <button type="submit">Next ></button>
   </form>
 
   <script>
@@ -38,3 +45,5 @@
     });
   </script>
 {% endblock %}
+</body>
+</html>

@@ -5,19 +5,19 @@ from django.http import JsonResponse
 from uuid import uuid4
 
 # Create your views here.
-def select_role(request):
+def select_roles(request):
     if request.method == 'POST':
         form = RoleForm(request.POST)
         if form.is_valid():
             roles = form.cleaned_data['roles']  # Get the Role instances
             role_names = [role.name for role in roles]  # Get the names from the Role instances
             request.session['role_names'] = role_names  # Save the Role names in the session.
-            return redirect('resolutions:select_cause')
+            return redirect('resolutions:select_causes')
     else:
         form = RoleForm()
-    return render(request, 'resolutions/select_role.html', {'form': form})
+    return render(request, 'resolutions/select_roles.html', {'form': form})
 
-def select_cause(request):
+def select_causes(request):
     if request.method == 'POST':
         form = CauseForm(request.POST)
         if form.is_valid():
@@ -27,7 +27,7 @@ def select_cause(request):
             return redirect('resolutions:select_resolutions')
     else:
         form = CauseForm()
-    return render(request, 'resolutions/select_cause.html', {'form': form})
+    return render(request, 'resolutions/select_causes.html', {'form': form})
 
 def select_resolutions(request):
     role_names = request.session.get('role_names', [])  # Get the Role names from the session
