@@ -1,0 +1,7 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+  <h1>{{ article.title }}</h1>
+  <div>{{ article.content|safe }}</div>
+  <p><small>Published on {{ article.pub_date }}</small></p>
+{% endblock %}

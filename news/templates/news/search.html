@@ -1,0 +1,12 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+  <h1>Search results for "{{ query }}"</h1>
+  {% for article in page_obj %}
+    <h2><a href="{% url 'news:news_article' article.id %}">{{ article.title }}</a></h2>
+    <div>{{ article.content|striptags|truncatewords:80 }}</div>
+    <p><small>Published on {{ article.pub_date }}</small></p>
+  {% empty %}
+    <p>No news articles yet.</p>
+  {% endfor %}
+{% endblock %}

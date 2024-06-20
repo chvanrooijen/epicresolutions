@@ -1,0 +1,86 @@
+/* CSS Variables */
+:root {
+    --main-color: #2F1D1D;
+    --secondary-color: #FFA500;
+}
+
+/* Table styles */
+th {
+    font-weight: bold;
+    padding: 10px;
+    text-align: left;
+}
+
+td {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Header styles */
+header {
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px;
+}
+
+header h1 {
+    color: var(--secondary-color); /* or any color you want */
+}
+
+/* Navigation styles */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+/* Main content styles */
+main {
+    padding: 20px;
+}
+
+/* Footer styles */
+footer {
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    color: var(--secondary-color); /* or any color you want */
+}
+
+/* Form styles */
+form {
+    margin-bottom: 20px;
+}
+
+form input[type="text"] {
+    padding: 5px;
+}
+
+form input[type="submit"] {
+    padding: 5px 10px;
+    background-color: var(--secondary-color);
+    border: none;
+    color: white;
+}
+
+/* Text styles */
+h1, h2, p, small {
+    color: var(--main-color);
+}
+
+a {
+    color: var(--secondary-color);
+}

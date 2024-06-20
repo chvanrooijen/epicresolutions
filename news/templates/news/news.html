@@ -1,0 +1,36 @@
+{% extends "news/base.html" %}
+
+{% block content %}
+  <h1>News</h1>
+
+  <form method="get" action="{% url 'news:search' %}">
+    <input type="text" name="q" placeholder="Search news articles">
+    <input type="submit" value="Search">
+  </form>
+  
+  {% for article in page_obj %}
+    <h2><a href="{% url 'news:news_article' article.id %}">{{ article.title }}</a></h2>
+    <div>{{ article.content|striptags|truncatewords:80 }}</div>
+    <p><small>Published on {{ article.pub_date }}</small></p>
+  {% empty %}
+    <p>No news articles yet.</p>
+  {% endfor %}
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+{% endblock %}
