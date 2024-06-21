@@ -1,14 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'resolutions/css/style.css' %}">
-</head>
-<body>
+{% extends "base.html" %}
+
 {% block content %}
   <form method="POST" action="{% url 'resolutions:personal_list' %}">
     {% csrf_token %}
-    <label for="form-id">Select the roles and resolutions you want to include on your personal list:</label>
+    <p><label for="form-id">Select the roles and resolutions you want to include on your personal list:</label></p>
     <table>
       <tr>
         <th class="primary">Role / Resolution</th>
@@ -45,5 +40,3 @@
     });
   </script>
 {% endblock %}
-</body>
-</html>
