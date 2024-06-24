@@ -8,35 +8,70 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Cause',
+            name="Cause",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Role',
+            name="Role",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
             ],
         ),
         migrations.CreateModel(
-            name='Resolution',
+            name="Resolution",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('positive_action', models.CharField(max_length=200)),
-                ('trigger', models.CharField(max_length=200)),
-                ('goal', models.CharField(max_length=200)),
-                ('incentive', models.CharField(max_length=200)),
-                ('negative_action', models.CharField(max_length=200)),
-                ('cause', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='resolutions.cause')),
-                ('role', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='resolutions.role')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("positive_action", models.CharField(max_length=200)),
+                ("trigger", models.CharField(max_length=200)),
+                ("goal", models.CharField(max_length=200)),
+                ("incentive", models.CharField(max_length=200)),
+                ("negative_action", models.CharField(max_length=200)),
+                (
+                    "cause",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="resolutions.cause",
+                    ),
+                ),
+                (
+                    "role",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="resolutions.role",
+                    ),
+                ),
             ],
         ),
     ]
