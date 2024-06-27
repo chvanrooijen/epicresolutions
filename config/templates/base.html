@@ -2,16 +2,24 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website Title</title>
+    <title>EPIC resolutions</title>
     <!-- Add your CSS files here -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
     <header>
-        <h1>EPIC resolutions</h1>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'C:\Users\Rick van Rooijen\epicresolutions\config\static\images\EPIC Main Logo Transparent bg.svg' %}"
+                alt="Website Logo" style="height: 20px;"> <!-- Adjust the path and style as needed -->
+        </a>
+        <a href="{% url 'news:news' %}">News</a>
+        <a href="{% url 'resolutions:select_roles' %}">Resolutions</a>
+        <a href="{% url 'about' %}">About</a>
     </header>
 
     <nav>
@@ -25,10 +33,11 @@
     </main>
 
     <footer>
-        <p>© 2024 EPIC resolutions</p>
+        <!-- Add your footer content here -->
     </footer>
 
     <!-- Add your JavaScript files here -->
     <!-- <script src="{% static 'js/script.js' %}"></script> -->
 </body>
+
 </html>

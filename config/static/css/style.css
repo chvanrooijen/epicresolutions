@@ -1,51 +1,45 @@
-/* CSS Variables */
+/* Global Variables */
 :root {
-    --main-color: rgb(255, 251, 240);
-    --secondary-color: rgb(6, 3, 2);
-    --tertiary-color: rgb(192, 220, 192);
+    --primary-color: rgb(255, 255, 255);
+    --secondary-color: rgb(34, 30, 31);
+    --tertiary-color: rgb(212, 31, 85);
+    --quaternary-color: rgb(160, 160, 164);
 }
 
-/* Table styles */
-th {
-    font-weight: bold;
-    padding: 10px;
-    text-align: left;
+/* Reset & Base Styles */
+html {
+    height: 100%;
 }
 
-td {
-    padding: 10px;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 100%;
+    margin: 0;
+    /* Removes default margin */
 }
 
-/* Primary heading */
-th.primary {
-    background-color: var(--secondary-color);
-    color: var(--main-color);
-}
-
-/* Secondary heading */
-th.secondary {
-    background-color: var(--tertiary-color);
-    color: var(--secondary-color);
-    padding-left: 20px;
-}
-
-/* Secondary data */
-td.secondary {
-    padding-left: 40px;
-}
-
-/* Header styles */
+/* Header */
 header {
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     color: var(--secondary-color);
+    display: flex;
+    align-items: center;
     padding: 10px;
 }
 
-header h1 {
+header a {
+    font-weight: bold;
     color: var(--secondary-color);
+    text-decoration: none;
+    /* Removes underline */
+    margin-right: 20px;
+    /* Spacing between links */
 }
 
-/* Navigation styles */
+/* Navigation */
 nav ul {
     list-style-type: none;
     padding: 0;
@@ -61,56 +55,99 @@ nav ul li a {
     text-decoration: none;
 }
 
-/* Main content styles */
+/* Main Content & Layout */
 main {
+    flex: 1;
     padding: 20px;
 }
 
-/* Footer styles */
-footer {
-    background-color: var(--tertiary-color);
+/* Text Styles */
+h1,
+h2,
+p,
+small {
     color: var(--secondary-color);
-    padding: 20px;
+}
+
+/* Table Styles */
+
+table {
+    border-bottom: 2px solid var(--quaternary-color);
+    margin-bottom: 20px;
+    /* Space between the table and any content below */
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+th.primary {
+    background-color: var(--tertiary-color);
+    color: var(--primary-color);
+}
+
+th.secondary {
+    background-color: var(--quaternary-color);
+    color: var(--secondary-color);
+}
+
+td.secondary {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* Form Styles */
+form {
+    margin-bottom: 20px;
+}
+
+form input[type="text"],
+form input[type="submit"] {
+    padding: 5px;
+}
+
+form input[type="submit"] {
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--primary-color);
+}
+
+/* Button Styles */
+button {
+    background-color: var(--tertiary-color);
+    border: 1px solid var(--tertiary-color);
+    color: var(--primary-color);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+/* Email obfuscation */
+.email {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 0px;
     text-align: center;
 }
 
 footer p {
     color: var(--secondary-color);
-}
-
-/* Form styles */
-form {
-    margin-bottom: 20px;
-}
-
-form input[type="text"] {
-    padding: 5px;
-}
-
-form input[type="submit"] {
-    padding: 5px 10px;
-    background-color: var(--secondary-color);
-    border: none;
-    color: var(--main-color);
-}
-
-/* Text styles */
-h1, h2, p, small {
-    color: var(--secondary-color);
-}
-
-/* Button styles */
-button {
-  background-color: var(--tertiary-color);
-  border: 1px solid var(--tertiary-color);
-  color: var(--secondary-color);
-  padding: 10px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 1em;
-  margin: 4px 2px;
-  cursor: pointer;
 }

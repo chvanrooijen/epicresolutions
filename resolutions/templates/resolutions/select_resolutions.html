@@ -1,42 +1,44 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <form method="POST" action="{% url 'resolutions:personal_list' %}">
-    {% csrf_token %}
-    <p><label for="form-id">Select the roles and resolutions you want to include on your personal list:</label></p>
-    <table>
-      <tr>
-        <th class="primary">Role / Resolution</th>
-        <th class="primary">Include</th>
-      </tr>
-      {% for role_with_resolutions in roles_with_resolutions %}
-        <tr class="role-row" data-role-id="{{ role_with_resolutions.role.id }}">
-          <th class="secondary">{{ role_with_resolutions.role.name }}</th>
-          <td>
-            <input type="checkbox" class="role-checkbox" name="include_role" value="{{ role_with_resolutions.role.id }}" checked>
-          </td>
-        </tr>
-        {% for resolution in role_with_resolutions.resolutions %}
-          <tr class="resolution-row" data-role-id="{{ role_with_resolutions.role.id }}">
-            <td class="secondary">{{ resolution.positive_action }}</td>
-            <td>
-              <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}" checked>
-            </td>
-          </tr>
-        {% endfor %}
-      {% endfor %}
-    </table>
-    <button type="submit">Next ></button>
-  </form>
+<form method="POST" action="{% url 'resolutions:personal_list' %}">
+  {% csrf_token %}
+  <p><label for="form-id">Select the roles and resolutions you want to include on your personal list:</label></p>
+  <table>
+    <tr>
+      <th class="primary">Roles and resolutions</th>
+      <th class="primary">Include</th>
+    </tr>
+    {% for role_with_resolutions in roles_with_resolutions %}
+    <tr class="role-row" data-role-id="{{ role_with_resolutions.role.id }}">
+      <th class="secondary">{{ role_with_resolutions.role.name }}</th>
+      <th class="secondary" , style="text-align: center;">
+        <input type="checkbox" class="role-checkbox" name="include_role" value="{{ role_with_resolutions.role.id }}"
+          checked>
+      </th>
+    </tr>
+    {% for resolution in role_with_resolutions.resolutions %}
+    <tr class="resolution-row" data-role-id="{{ role_with_resolutions.role.id }}">
+      <td class="secondary">{{ resolution.positive_action }}</td>
+      <td class="secondary" , style="text-align: center;">
+        <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}"
+          checked>
+      </td>
+    </tr>
+    {% endfor %}
+    {% endfor %}
+  </table>
+  <button type="submit">Next &raquo;</button>
+</form>
 
-  <script>
-    document.querySelectorAll('.role-checkbox').forEach(function(roleCheckbox) {
-      roleCheckbox.addEventListener('change', function() {
-        var roleId = this.closest('.role-row').dataset.roleId;
-        document.querySelectorAll('.resolution-row[data-role-id="' + roleId + '"] .resolution-checkbox').forEach(function(resolutionCheckbox) {
-          resolutionCheckbox.checked = roleCheckbox.checked;
-        });
+<script>
+  document.querySelectorAll('.role-checkbox').forEach(function (roleCheckbox) {
+    roleCheckbox.addEventListener('change', function () {
+      var roleId = this.closest('.role-row').dataset.roleId;
+      document.querySelectorAll('.resolution-row[data-role-id="' + roleId + '"] .resolution-checkbox').forEach(function (resolutionCheckbox) {
+        resolutionCheckbox.checked = roleCheckbox.checked;
       });
     });
-  </script>
+  });
+</script>
 {% endblock %}
