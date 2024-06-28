@@ -1,3 +1,5 @@
+import os
+import tempfile
 from django.shortcuts import (
     render,
     redirect,
@@ -5,9 +7,10 @@ from django.shortcuts import (
 )  # Redirect is a new import to save the Roles and Causes in the session and then use these values to filter the Resolutions.
 from .forms import RoleForm, CauseForm
 from .models import Role, Cause, Resolution
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
 from uuid import uuid4
-
 
 # Create your views here.
 def select_roles(request):
@@ -73,11 +76,14 @@ def select_resolutions(request):
 
     return render(request, "resolutions/select_resolutions.html", context)
 
-
 def personal_list(request):
     if request.method == "POST":
         included_roles = request.POST.getlist("include_role")
         included_resolutions = request.POST.getlist("include_resolution")
+
+        # Save selected IDs in session for later retrieval in generate_pdf
+        request.session['included_roles_ids'] = included_roles
+        request.session['included_resolutions_ids'] = included_resolutions
 
         roles = Role.objects.filter(id__in=included_roles)
         resolutions = Resolution.objects.filter(id__in=included_resolutions)
@@ -90,3 +96,36 @@ def personal_list(request):
                 "resolutions": resolutions,
             },
         )
+
+def generate_pdf(request):
+    # Fetch IDs from session
+    included_roles_ids = request.session.get('included_roles_ids', [])
+    included_resolutions_ids = request.session.get('included_resolutions_ids', [])
+
+    # Fetch Role and Resolution instances based on retrieved IDs
+    roles = Role.objects.filter(id__in=included_roles_ids)
+    resolutions = Resolution.objects.filter(id__in=included_resolutions_ids)
+
+    # Render the HTML content
+    html_content = render_to_string('resolutions/pdf_template.html', {'roles': roles, 'resolutions': resolutions})
+
+    # Generate PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="personal_resolutions.pdf"'
+
+    # Create a temporary file to hold the PDF
+    fd, path = tempfile.mkstemp()
+    try:
+        # Generate PDF and save to the temporary file
+        HTML(string=html_content).write_pdf(path)
+
+        # Read the PDF content
+        with open(path, 'rb') as f:
+            response.write(f.read())
+    finally:
+        os.close(fd)  # Close the file descriptor
+        os.remove(path)  # Delete the temporary file
+
+    return response
+
+

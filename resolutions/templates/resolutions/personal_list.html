@@ -1,23 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <p>Print or save your personal resolutions</p>
-  
-  <table>
-    <tr>
-      <th class="primary">My resolutions</th>
-    </tr>
-    {% for role in roles %}
-      <tr>
-        <th class="secondary">{{ role.name }}</th>
-      </tr>
-      {% for resolution in resolutions %}
-        {% if resolution.role.id == role.id %}
-          <tr>
-            <td class="secondary">{{ resolution.positive_action }}</td>
-          </tr>
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  </table>
+<p>Print or save your personal resolutions</p>
+
+<table>
+  <tr>
+    <th class="primary">My resolutions</th>
+  </tr>
+  {% for role in roles %}
+  <tr>
+    <th class="secondary">{{ role.name }}</th>
+  </tr>
+  {% for resolution in resolutions %}
+  {% if resolution.role.id == role.id %}
+  <tr>
+    <td class="secondary">{{ resolution.positive_action }}</td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+  {% endfor %}
+</table>
+
+<!-- Button to generate PDF -->
+<button onclick="generatePDF()">Generate PDF</button>
+
+<script>
+  function generatePDF() {
+    window.location.href = '{% url "resolutions:generate_pdf" %}';
+  }
+</script>
+
 {% endblock %}
