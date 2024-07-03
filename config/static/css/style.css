@@ -134,6 +134,31 @@ button {
     cursor: pointer;
 }
 
+button[type="submit"]:hover {
+    opacity: 0.7;
+    background-color: var(--tertiary-color);
+}
+
+/* Comment styles */
+.comment-container {
+    border: 1px solid var(--quaternary-color);
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+}
+
+.comment-meta {
+    font-size: 0.9em;
+    color: var(--quaternary-color);
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    font-size: 1em;
+    line-height: 1.4;
+}
+
 /* Email obfuscation */
 .email {
     unicode-bidi: bidi-override;

@@ -14,10 +14,10 @@
 <body>
     <header>
         <a href="{% url 'home' %}">
-            <img src="{% static 'C:\Users\Rick van Rooijen\epicresolutions\config\static\images\EPIC Main Logo Transparent bg.svg' %}"
-                alt="Website Logo" style="height: 20px;"> <!-- Adjust the path and style as needed -->
+            <img src="{% static 'images/EPIC Main Logo Transparent bg.svg' %}" alt="Website Logo" style="height: 20px;">
+            <!-- Adjust the path and style as needed -->
         </a>
-        <a href="{% url 'news:news' %}">News</a>
+        <a href="{% url 'posts:post_list' %}">News</a>
         <a href="{% url 'resolutions:select_roles' %}">Resolutions</a>
         <a href="{% url 'about' %}">About</a>
     </header>
