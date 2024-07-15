@@ -1,5 +1,57 @@
 {% extends "base.html" %}
-
 {% block content %}
-<h1>Homepage</h1>
+
+<body>
+    <div class="container container-primary">
+        <div class="background-text">#0</div>
+        <div class="foreground-text">Welcome to <b>epicresolutions.org</b>, where we provide a clear path to action for
+            anyone looking to make a difference. In just four steps, you can create a list of actionable resolutions
+            that align with your societal roles and causes you care about.</div>
+        <div class="foreground-text">Here's how it works:</div>
+    </div>
+    <div class="container container-secondary">
+        <a id="roles" href="#roles" style="position:absolute; margin-top:-400px; visibility:hidden;"></a>
+        <div class="background-text">#1</div>
+        <div class="foreground-text">The first step is to select the <b>roles</b>
+            you identify with, such as being an Employee, Employer, Entrepreneur, Parent, Politician, Investor, Citizen,
+            Consumer, or Child. Each of these roles offers a unique perspective and set of responsibilities, and when
+            combined, they provide a comprehensive view of societal engagement. Also, the name "EPIC resolutions"
+            derives from the first letters of these roles.
+        </div>
+    </div>
+    <div class="container container-tertiary">
+        <div class="background-text">#2</div>
+        <div class="foreground-text">The next step is to select the <b>causes</b> you care about. Whether it's
+            sustainability, equality and diversity, or health and well-being, some causes might resonate with you more
+            than others. By selecting the causes you care about, you can focus your efforts on the issues that matter
+            most to you. As Dr. Seuss wisely said <q>Unless someone like you cares a whole awful lot, nothing is going
+                to
+                get better. It's not.</q>
+        </div>
+    </div>
+    <div class="container container-quaternary">
+        <div style="color: var(--primary-color)" class="background-text">#3</div>
+        <div style="color: var(--primary-color)" class="foreground-text">Based on your selected roles and causes,
+            epicresolutions.org will filter and
+            display resolutions tailored to your interests. Choose from this list to create a personalised list of
+            resolutions.</div>
+    </div>
+    <div class="container container-primary">
+        <div class="background-text">#4</div>
+        <div class="foreground-text">Finally, you'll receive a personalised list of resolutions. You can download it as
+            a PDF for offline reference or printing.</div>
+    </div>
+</body>
+
+<script>
+    window.onload = function () {
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(container => {
+            const backgroundText = container.querySelector('.background-text');
+            const scaleFactor = 0.8; // Adjust this value based on your design
+            const fontSize = container.offsetHeight * scaleFactor;
+            backgroundText.style.fontSize = `${fontSize}px`;
+        });
+    };
+</script>
 {% endblock %}

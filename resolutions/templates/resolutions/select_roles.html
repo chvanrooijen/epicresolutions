@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Next &raquo;</button>
-</form>
+<div class="content-container">
+    <p>Select the roles you identify with:</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Next &raquo;</button>
+    </form>
+</div>
 {% endblock %}

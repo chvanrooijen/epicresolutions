@@ -2,8 +2,8 @@
 :root {
     --primary-color: rgb(255, 255, 255);
     --secondary-color: rgb(34, 30, 31);
-    --tertiary-color: rgb(212, 31, 85);
-    --quaternary-color: rgb(160, 160, 164);
+    --tertiary-color: rgb(170, 191, 170);
+    --quaternary-color: rgb(42, 95, 85);
 }
 
 /* Reset & Base Styles */
@@ -12,13 +12,30 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
+    /* Stack elements vertically */
     min-height: 100vh;
-    min-width: 100%;
+    /* Use vh unit to fill full viewport height */
     margin: 0;
-    /* Removes default margin */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    flex: 1;
+    /* Allows the main content to grow and fill available space */
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    /* Ensures box-sizing is consistent across elements */
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Header */
@@ -27,7 +44,7 @@ header {
     color: var(--secondary-color);
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 20px;
 }
 
 header a {
@@ -40,41 +57,84 @@ header a {
 }
 
 /* Navigation */
-nav ul {
-    list-style-type: none;
-    padding: 0;
+.nav {
+    background-color: var(--quaternary-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 }
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color: var(--secondary-color);
+.nav a,
+.nav ul li a {
     text-decoration: none;
+    /* Remove underline from all links */
+    color: inherit;
+    /* Inherit color from .nav */
+    font-size: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-/* Main Content & Layout */
-main {
-    flex: 1;
-    padding: 20px;
+.nav ul {
+    list-style: none;
+    /* Remove bullet points */
+    display: flex;
+    align-items: center;
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+}
+
+.nav a img {
+    height: 21px;
+    /* Logo height */
+    width: auto;
+    /* Maintain aspect ratio */
+    vertical-align: middle;
+}
+
+.nav ul li {
+    margin-right: 20px;
+    /* Consistent margin for list items */
 }
 
 /* Text Styles */
 h1,
 h2,
+h3,
 p,
-small {
+small,
+.foreground-text {
     color: var(--secondary-color);
 }
 
 /* Table Styles */
 
 table {
-    border-bottom: 2px solid var(--quaternary-color);
+    position: relative;
     margin-bottom: 20px;
     /* Space between the table and any content below */
+}
+
+table::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    /* Indent from the left */
+    right: 0;
+    /* Stretch to the right edge */
+    bottom: 0;
+    /* Align to the bottom */
+    height: 2px;
+    /* Height of the border */
+    background-color: var(--quaternary-color);
+    /* Color of the border */
 }
 
 th,
@@ -88,12 +148,12 @@ th {
 }
 
 th.primary {
-    background-color: var(--tertiary-color);
+    background-color: var(--quaternary-color);
     color: var(--primary-color);
 }
 
 th.secondary {
-    background-color: var(--quaternary-color);
+    background-color: var(--tertiary-color);
     color: var(--secondary-color);
 }
 
@@ -120,9 +180,9 @@ form input[type="submit"] {
 
 /* Button Styles */
 button {
-    background-color: var(--tertiary-color);
-    border: 1px solid var(--tertiary-color);
-    color: var(--primary-color);
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
     padding: 10px 30px;
     text-align: center;
     text-decoration: none;
@@ -134,23 +194,80 @@ button {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+button:hover {
     opacity: 0.7;
+    background-color: var(--primary-color);
+}
+
+/* Container styles */
+.content-container {
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    /* Make container fill the width */
+    min-height: 300px;
+    /* Adjust based on your needs */
+    position: relative;
+    padding-right: 35%;
+}
+
+.background-text {
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    /* Aligns the element to the right */
+    text-align: right;
+    width: 35%;
+    /* Define width to control space */
+    opacity: 0.1;
+    /* Additional styling */
+    max-height: 100%;
+    /* Optional: Sets the maximum height of the element to 100% of its container's height */
+    padding-right: 20px;
+}
+
+.foreground-text {
+    font-size: 20px;
+    z-index: 2;
+    padding-left: 20px;
+    /* Indent text 20px from the left */
+}
+
+/* Additional container-specific background colors */
+.container-primary {
+    background-color: var(--primary-color);
+}
+
+.container-secondary {
+    background-color: rgb(34, 30, 31, 0.1);
+}
+
+.container-tertiary {
     background-color: var(--tertiary-color);
+}
+
+.container-quaternary {
+    background-color: var(--quaternary-color);
 }
 
 /* Comment styles */
 .comment-container {
-    border: 1px solid var(--quaternary-color);
+    border: 1px solid var(--secondary-color);
     margin-bottom: 20px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: var(--primary-color);
 }
 
 .comment-meta {
     font-size: 0.9em;
-    color: var(--quaternary-color);
+    color: var(--secondary-color);
     margin-bottom: 5px;
 }
 
@@ -165,14 +282,44 @@ button[type="submit"]:hover {
     direction: rtl;
 }
 
-/* Footer */
-footer {
-    background-color: var(--primary-color);
+/* Footer Styles */
+.footer {
+    background-color: rgb(34, 30, 31, 0.1);
     color: var(--secondary-color);
-    padding: 0px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 20px;
 }
 
-footer p {
-    color: var(--secondary-color);
+.footer ul {
+    display: flex;
+    list-style: none;
+    /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.footer ul li {
+    margin-right: 20px;
+    /* Space between list items */
+}
+
+.footer a {
+    color: inherit;
+    /* Inherit color from parent */
+    text-decoration: none;
+    /* Remove underline */
+    font-weight: normal;
+    /* Normal font weight */
+}
+
+.footer a img {
+    height: 20px;
+    /* Logo height */
+    width: auto;
+    /* Maintain aspect ratio */
 }

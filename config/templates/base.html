@@ -12,18 +12,15 @@
 </head>
 
 <body>
-    <header>
-        <a href="{% url 'home' %}">
-            <img src="{% static 'images/EPIC Main Logo Transparent bg.svg' %}" alt="Website Logo" style="height: 20px;">
-            <!-- Adjust the path and style as needed -->
-        </a>
-        <a href="{% url 'posts:post_list' %}">News</a>
-        <a href="{% url 'resolutions:select_roles' %}">Resolutions</a>
-        <a href="{% url 'about' %}">About</a>
-    </header>
-
-    <nav>
-        <!-- Add your navigation elements here -->
+    <nav class="nav">
+        <ul>
+            <li><a href="{% url 'home' %}">
+                    <img src="{% static 'images\EPIC White logo Transparent bg.svg' %}" alt="Website Logo">
+                </a></li>
+            <li>News</li>
+            <li><a href="{% url 'resolutions:select_roles' %}">Resolutions</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+        </ul>
     </nav>
 
     <main>
@@ -32,12 +29,18 @@
         {% endblock %}
     </main>
 
-    <footer>
-        <!-- Add your footer content here -->
+    <footer class="footer">
+        <ul>
+            <li><a href="{% url 'vulnerabilities' %}">Vulnerabilities</a></li>
+            <li><a href="{% url 'privacy' %}">Privacy</a></li>
+            <li><a href="{% url 'copyright' %}">Copyright</a></li>
+            <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
+        </ul>
     </footer>
 
     <!-- Add your JavaScript files here -->
-    <!-- <script src="{% static 'js/script.js' %}"></script> -->
+    <!-- <script src="{% static 'js/main.js' %}"></script> -->
+
 </body>
 
 </html>

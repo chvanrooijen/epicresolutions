@@ -6,7 +6,7 @@ class RoleForm(forms.Form):
     roles = forms.ModelMultipleChoiceField(
         queryset=Role.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        label="Select the roles you identify with:",
+        label="",
     )
 
 
@@ -14,5 +14,5 @@ class CauseForm(forms.Form):
     causes = forms.ModelMultipleChoiceField(
         queryset=Cause.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        label="Select the causes you care about:",
+        label="",
     )
