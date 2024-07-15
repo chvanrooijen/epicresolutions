@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <h1>{{ object.title }}</h1>
+    <div>
+        <p>{{ object.content | safe }}</p>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h2>Leave a comment</h2>
+        {{ comment_form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Comments</h2>
+
+    {% for comment in comments %}
+    <div class="comment-container">
+        <div class="comment-meta">
+            On {{ comment.created_date | date:"F d, Y" }} <b>{{ comment.name }}</b> wrote:
+        </div>
+        <div class="comment-text">
+            {{ comment.text | linebreaks }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
