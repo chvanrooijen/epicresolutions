@@ -4,6 +4,7 @@
     --secondary-color: rgb(34, 30, 31);
     --tertiary-color: rgb(170, 191, 170);
     --quaternary-color: rgb(42, 95, 85);
+    --quinary-color: rgb(233, 233, 233);
 }
 
 /* Reset & Base Styles */
@@ -63,10 +64,7 @@ header a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
+    padding: 10px 20px;
 }
 
 .nav a,
@@ -239,13 +237,18 @@ button:hover {
     /* Indent text 20px from the left */
 }
 
+.container>.foreground-text:not(:last-child) {
+    margin-bottom: 20px;
+    /* Adjust the value as needed */
+}
+
 /* Additional container-specific background colors */
 .container-primary {
     background-color: var(--primary-color);
 }
 
 .container-secondary {
-    background-color: rgb(34, 30, 31, 0.1);
+    background-color: var(--quinary-color);
 }
 
 .container-tertiary {
@@ -276,50 +279,72 @@ button:hover {
     line-height: 1.4;
 }
 
-/* Email obfuscation */
-.email {
-    unicode-bidi: bidi-override;
-    direction: rtl;
-}
-
 /* Footer Styles */
 .footer {
-    background-color: rgb(34, 30, 31, 0.1);
+    background-color: var(--quinary-color);
     color: var(--secondary-color);
     display: flex;
     align-items: center;
-    justify-content: left;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 20px;
+    justify-content: space-between;
+    padding: 10px 20px;
 }
 
-.footer ul {
+/* Common styles for footer images and links */
+.footer img,
+.footer a {
+    max-height: 20px;
+    /* Adjusted to apply max-height to images for consistency */
+    width: auto;
+    color: inherit;
+    /* Ensures links inherit footer text color */
+    text-decoration: none;
+    /* Removes underline from links */
+    display: inline-flex;
+    /* Aligns items inline with flex properties */
+    align-items: center;
+    /* Vertically centers items */
+}
+
+/* Footer links and social media links container styles */
+.footer-links,
+.social-media-links {
+    display: flex;
+}
+
+/* List styles for footer links and social media links */
+.footer-links ul,
+.social-media-links ul {
     display: flex;
     list-style: none;
-    /* Remove bullet points */
+    /* Removes bullet points */
     padding: 0;
     margin: 0;
 }
 
-.footer ul li {
+/* List item styles for footer links and social media links */
+.footer-links ul li,
+.social-media-links ul li {
     margin-right: 20px;
-    /* Space between list items */
+    /* Adds spacing between items */
+    display: flex;
+    align-items: center;
+    /* Vertically centers content within list items */
 }
 
-.footer a {
-    color: inherit;
-    /* Inherit color from parent */
-    text-decoration: none;
-    /* Remove underline */
-    font-weight: normal;
-    /* Normal font weight */
+/* Removes right margin for the last item in the list for both link types */
+.footer-links ul li:last-child,
+.social-media-links ul li:last-child {
+    margin-right: 0;
 }
 
-.footer a img {
-    height: 20px;
-    /* Logo height */
-    width: auto;
-    /* Maintain aspect ratio */
+/* Additional style to ensure content within list items is centered */
+.footer .social-media-links ul li {
+    justify-content: center;
+    /* Horizontally centers items if needed */
+}
+
+.social-media-links ul li img {
+    margin-right: 5px;
+    /* Adjust the value as needed */
+    /* Adds spacing between the image and the text */
 }

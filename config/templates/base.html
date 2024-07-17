@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPIC resolutions</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images\favicon.ico' %}">
     <!-- Add your CSS files here -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 </head>
@@ -30,12 +31,30 @@
     </main>
 
     <footer class="footer">
-        <ul>
-            <li><a href="{% url 'vulnerabilities' %}">Vulnerabilities</a></li>
-            <li><a href="{% url 'privacy' %}">Privacy</a></li>
-            <li><a href="{% url 'copyright' %}">Copyright</a></li>
-            <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
-        </ul>
+        <div class="footer-links">
+            <ul>
+                <li><a href="{% url 'vulnerabilities' %}">Vulnerabilities</a></li>
+                <li><a href="{% url 'privacy' %}">Privacy</a></li>
+                <li><a href="{% url 'copyright' %}">Copyright</a></li>
+                <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
+            </ul>
+        </div>
+        <div class="social-media-links">
+            <ul>
+                <li>
+                    <a href="https://mastodon.social/@epicresolutions"><img
+                            src="{% static 'images/mastodon_logo.svg' %}" alt="Mastodon">Mastodon</a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/company/epicresolutions/"><img
+                            src="{% static 'images/linkedin_logo.svg' %}" alt="LinkedIn">LinkedIn</a>
+                </li>
+                <li>
+                    <a href="https://github.com/chvanrooijen/epicresolutions"><img
+                            src="{% static 'images/github_logo.svg' %}" alt="GitHub">GitHub</a>
+                </li>
+            </ul>
+        </div>
     </footer>
 
     <!-- Add your JavaScript files here -->
