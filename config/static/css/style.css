@@ -10,33 +10,81 @@
 /* Reset & Base Styles */
 html {
     height: 100%;
+    font-size: 16px;
+    overflow-y: scroll;
 }
 
 body {
     display: flex;
     flex-direction: column;
-    /* Stack elements vertically */
     min-height: 100vh;
-    /* Use vh unit to fill full viewport height */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 main {
     flex: 1;
-    /* Allows the main content to grow and fill available space */
 }
 
 *,
 *::before,
 *::after {
     box-sizing: inherit;
-    /* Ensures box-sizing is consistent across elements */
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
+/* Responsive Grid System */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer {
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer {
+        padding: 10px;
+    }
 }
 
 /* Header */
@@ -112,6 +160,26 @@ small,
     color: var(--secondary-color);
 }
 
+ol,
+ul {
+    padding-left: 0;
+    /* Or a small value like 10px if you want a slight indent */
+}
+
+li {
+    list-style-position: inside;
+    /* Ensures the bullet or number is aligned with the text */
+}
+
+li>p {
+    margin-top: 1.5px;
+    /* Reduces the space above the <p> element */
+    text-indent: -1em;
+    /* Adjust this value as needed to align with the <li> text */
+    padding-left: 2.4em;
+    /* Compensate for the negative indent, adjust as needed */
+}
+
 /* Table Styles */
 
 table {
@@ -174,6 +242,32 @@ form input[type="submit"] {
     background-color: var(--secondary-color);
     border: none;
     color: var(--primary-color);
+}
+
+/* Search Form Styles */
+.search-form {
+    margin-bottom: 0;
+}
+
+.search-input {
+    padding: 5px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    font-size: 1em;
+    margin-right: 10px;
+}
+
+.search-button {
+    background-color: var(--secondary-color);
+    border: none;
+    color: var(--primary-color);
+    padding: 5px 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    opacity: 0.7;
 }
 
 /* Button Styles */
@@ -284,31 +378,28 @@ button:hover {
     background-color: var(--quinary-color);
     color: var(--secondary-color);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     padding: 10px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 /* Common styles for footer images and links */
 .footer img,
 .footer a {
     max-height: 20px;
-    /* Adjusted to apply max-height to images for consistency */
     width: auto;
     color: inherit;
-    /* Ensures links inherit footer text color */
     text-decoration: none;
-    /* Removes underline from links */
     display: inline-flex;
-    /* Aligns items inline with flex properties */
     align-items: center;
-    /* Vertically centers items */
-}
-
-/* Footer links and social media links container styles */
-.footer-links,
-.social-media-links {
-    display: flex;
 }
 
 /* List styles for footer links and social media links */
@@ -316,7 +407,6 @@ button:hover {
 .social-media-links ul {
     display: flex;
     list-style: none;
-    /* Removes bullet points */
     padding: 0;
     margin: 0;
 }
@@ -325,10 +415,8 @@ button:hover {
 .footer-links ul li,
 .social-media-links ul li {
     margin-right: 20px;
-    /* Adds spacing between items */
     display: flex;
     align-items: center;
-    /* Vertically centers content within list items */
 }
 
 /* Removes right margin for the last item in the list for both link types */
@@ -337,14 +425,26 @@ button:hover {
     margin-right: 0;
 }
 
-/* Additional style to ensure content within list items is centered */
-.footer .social-media-links ul li {
-    justify-content: center;
-    /* Horizontally centers items if needed */
+/* Adds spacing between the image and the text */
+.social-media-links ul li img {
+    margin-right: 7px;
 }
 
-.social-media-links ul li img {
-    margin-right: 5px;
-    /* Adjust the value as needed */
-    /* Adds spacing between the image and the text */
+/* Horizontal rule styling */
+.footer hr {
+    width: 100%;
+    margin: 0;
+}
+
+/* Footer paragraph styling */
+.footer p {
+    margin: 10px 10px 0 10px;
+}
+
+.slogan {
+    font-size: 1.0em;
+    font-weight: normal;
+    margin: 10px 0;
+    text-align: center;
+    color: var(--secondary-color);
 }

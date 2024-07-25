@@ -4,19 +4,34 @@
 <div class="content-container">
     <h1>Vulnerabilities</h1>
     <p>EPIC resolutions is committed to providing a secure website. If you discover a security vulnerability, please
-        report
-        it
-        to us by emailing <span class="email">
-            <p>When reporting a security vulnerability, please include the following:</p>
-            <ul>
-                <li>Describe the location and potential impact of the vulnerability</li>
-                <li>A detailed description of the steps required to reproduce the vulnerability</li>
-                <li>Your name and contact information</li>
-            </ul>
-            <p>EPIC resolutions will review your report and respond as soon as possible. We appreciate your help in
-                keeping
-                our website
-                safe.</p>
-        </span>
+        report it to us via <span id="emailLink">email</span>.</p>
+    <p>When reporting a security vulnerability, please include the following details:</p>
+    <ol>
+        <li>
+            <strong>Description of Vulnerability:</strong>
+            <p>Clearly describe the location and potential impact of the vulnerability.</p>
+        </li>
+        <li>
+            <strong>Steps to Reproduce:</strong>
+            <p>Provide a detailed description of the steps required to reproduce the vulnerability.</p>
+        </li>
+        <li>
+            <strong>Contact Information:</strong>
+            <p>Include your name and contact information so that we can reach out if needed.</p>
+        </li>
+    </ol>
+    <p>EPIC resolutions will review your report and respond as soon as possible. We appreciate your help in
+        keeping our website safe.</p>
+    </span>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var emailUser = 'security';
+        var emailDomain = 'epicresolutions.org';
+        var emailLinkElement = document.getElementById('emailLink');
+        if (emailLinkElement) {
+            emailLinkElement.innerHTML = '<a href="mailto:' + emailUser + '@' + emailDomain + '">email</a>';
+        }
+    });
+</script>
 {% endblock %}

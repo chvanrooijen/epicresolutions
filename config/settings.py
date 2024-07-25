@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "resolutions",
     "pages",
     "posts",
+    "search",
     ]
 
 MIDDLEWARE = [
