@@ -44,5 +44,18 @@
       });
     });
   });
+
+  document.querySelectorAll('.resolution-checkbox').forEach(function (resolutionCheckbox) {
+    resolutionCheckbox.addEventListener('change', function () {
+      var roleId = this.closest('.resolution-row').dataset.roleId;
+      var allUnchecked = true;
+      document.querySelectorAll('.resolution-row[data-role-id="' + roleId + '"] .resolution-checkbox').forEach(function (checkbox) {
+        if (checkbox.checked) {
+          allUnchecked = false;
+        }
+      });
+      document.querySelector('.role-row[data-role-id="' + roleId + '"] .role-checkbox').checked = !allUnchecked;
+    });
+  });
 </script>
 {% endblock %}

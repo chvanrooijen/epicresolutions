@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,43 +6,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPIC resolutions</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images\favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <nav class="nav">
         <ul>
             <li><a href="{% url 'home' %}">
-                    <img src="{% static 'images\EPIC White logo Transparent bg.svg' %}" alt="Website Logo">
+                    <img src="{% static 'images/EPIC White logo Transparent bg.svg' %}" alt="Website Logo">
                 </a></li>
-            <li><a href="{% url 'posts:post_list' %}">News</li>
+            <li><a href="{% url 'posts:post_list' %}">News</a></li>
             <li><a href="{% url 'resolutions:select_roles' %}">Resolutions</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
         </ul>
         <form action="{% url 'search' %}" method="get" class="search-form">
             <div class="input-container">
                 <input type="text" name="q" placeholder="Search..." class="search-input">
-                <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+                <button type="submit" class="search-button">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M10 2C5.58 2 2 5.58 2 10s3.58 8 8 8c1.85 0 3.55-.63 4.9-1.69l5.39 5.39 1.41-1.41-5.39-5.39C17.37 13.55 18 11.85 18 10c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"
+                            fill="var(--quaternary-color)" stroke="var(--quaternary-color)" stroke-width="1.3" />
+                    </svg>
+                </button>
             </div>
         </form>
     </nav>
-
     <main>
         {% block content %}
         <!-- This is where the content from child templates will go -->
         {% endblock %}
     </main>
-
     <div class="footer">
         <div class="footer-content">
             <div class="footer-links">
                 <ul>
-                    <li><a href="{% url 'vulnerabilities' %}">Vulnerabilities</a></li>
-                    <li><a href="{% url 'privacy' %}">Privacy</a></li>
-                    <li><a href="{% url 'copyright' %}">Copyright</a></li>
                     <li><a href="{% url 'accessibility' %}">Accessibility</a></li>
+                    <li><a href="{% url 'privacy' %}">Privacy</a></li>
+                    <li><a href="{% url 'vulnerabilities' %}">Vulnerabilities</a></li>
+                    <li><a href="{% url 'copyright' %}">Copyright</a></li>
                 </ul>
             </div>
             <div class="social-media-links">
@@ -66,10 +69,8 @@
         <hr>
         <p class="slogan">EPIC resolutions. A clear path to action for anyone looking to make a difference.</p>
     </div>
-
     <!-- Add your JavaScript files here -->
     <!-- <script src="{% static 'js/main.js' %}"></script> -->
-
 </body>
 
 </html>
