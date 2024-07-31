@@ -27,7 +27,7 @@ def select_roles(request):
             return redirect("resolutions:select_causes")
     else:
         form = RoleForm()
-    return render(request, "resolutions/select_roles.html", {"form": form})
+    return render(request, "resolutions/select-roles.html", {"form": form})
 
 
 def select_causes(request):
@@ -44,7 +44,7 @@ def select_causes(request):
             return redirect("resolutions:select_resolutions")
     else:
         form = CauseForm()
-    return render(request, "resolutions/select_causes.html", {"form": form})
+    return render(request, "resolutions/select-causes.html", {"form": form})
 
 
 def select_resolutions(request):
@@ -74,7 +74,7 @@ def select_resolutions(request):
         "causes": causes,
     }
 
-    return render(request, "resolutions/select_resolutions.html", context)
+    return render(request, "resolutions/select-resolutions.html", context)
 
 def personal_list(request):
     if request.method == "POST":
@@ -90,7 +90,7 @@ def personal_list(request):
 
         return render(
             request,
-            "resolutions/personal_list.html",
+            "resolutions/personal-list.html",
             {
                 "roles": roles,
                 "resolutions": resolutions,
@@ -107,7 +107,7 @@ def generate_pdf(request):
     resolutions = Resolution.objects.filter(id__in=included_resolutions_ids)
 
     # Render the HTML content
-    html_content = render_to_string('resolutions/pdf_template.html', {'roles': roles, 'resolutions': resolutions})
+    html_content = render_to_string('resolutions/pdf-template.html', {'roles': roles, 'resolutions': resolutions})
 
     # Generate PDF
     response = HttpResponse(content_type='application/pdf')

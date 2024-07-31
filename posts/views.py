@@ -7,12 +7,12 @@ from .forms import CommentForm
 # Create your views here.
 class PostListView(ListView):
     model = Post
-    template_name = "post_list.html"
+    template_name = "posts/post-list.html"
 
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = "posts/post_detail.html"
+    template_name = "posts/post-detail.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -40,4 +40,4 @@ def category_filter(request, pk):
     # Filter posts by the selected category
     posts = Post.objects.filter(categories=category)
     # Render the template with the filtered posts and the category
-    return render(request, 'posts/category_filter.html', {'object_list': posts, 'category': category})
+    return render(request, 'posts/category-filter.html', {'object_list': posts, 'category': category})

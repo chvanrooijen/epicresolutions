@@ -23,7 +23,7 @@ def search(request):
     template_results = search_templates(query)
     results.extend(template_results)
 
-    return render(request, 'search/search_results.html', {'query': query, 'results': results})
+    return render(request, 'search/search-results.html', {'query': query, 'results': results})
 
 def search_templates(query):
     # Adjust the path to the pages app's templates directory
