@@ -10,42 +10,122 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
+            position: relative;
+            margin-bottom: 20px;
+            /* Space between the table and any content below */
+        }
+
+        table::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            /* Indent from the left */
+            right: 0;
+            /* Stretch to the right edge */
+            bottom: 0;
+            /* Align to the bottom */
+            height: 2px;
+            /* Height of the border */
+            background-color: rgb(42, 95, 85);
+            /* Color of the border */
         }
 
         th,
         td {
-            border: 1px solid black;
-            padding: 8px;
+            padding: 10px;
+        }
+
+        th {
+            font-weight: bold;
             text-align: left;
         }
 
-        th.primary,
+        th.primary {
+            background-color: rgb(42, 95, 85);
+            color: rgb(255, 255, 255);
+        }
+
+        th.secondary {
+            background-color: rgb(170, 191, 170);
+            color: rgb(34, 30, 31);
+        }
+
         td.secondary {
-            background-color: #f2f2f2;
+            background-color: rgb(255, 255, 255);
+            color: rgb(34, 30, 31);
+        }
+
+        /* Ensure the body takes the full height */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for the content */
+        .content {
+            min-height: 100%;
+            position: relative;
+        }
+
+        /* Footer styling */
+        footer {
+            position: absolute;
+            bottom: -60px;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            color: rgb(34, 30, 31);
+            text-align: center;
+        }
+
+        /* Horizontal line styling */
+        .horizontal-line {
+            width: 100%;
+            height: 2px;
+            /* Adjust the height as needed */
+            background-color: rgb(170, 191, 170);
+            /* Adjust the color as needed */
+            margin: 10px 0;
+            /* Adjust the margin as needed */
+        }
+
+        /* Slogan styling */
+        slogan {
+            font-size: 1.0em;
+            font-weight: normal;
+            text-align: center;
+            color: rgb(34, 30, 31);
+            margin-top: 20px;
+            /* Increase the top margin to add space between the line and the slogan */
         }
     </style>
 </head>
 
 <body>
-    <table>
-        <tr>
-            <th class="primary">My resolutions</th>
-        </tr>
-        {% for role in roles %}
-        <tr>
-            <th class="secondary">{{ role.name }}</th>
-        </tr>
-        {% for resolution in resolutions %}
-        {% if resolution.role.id == role.id %}
-        <tr>
-            <td class="secondary">{{ resolution.positive_action }}</td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-    </table>
+    <div class="content">
+        <table>
+            <tr>
+                <th class="primary">My resolutions</th>
+            </tr>
+            {% for role in roles %}
+            <tr>
+                <th class="secondary">{{ role.name }}</th>
+            </tr>
+            {% for resolution in resolutions %}
+            {% if resolution.role.id == role.id %}
+            <tr>
+                <td class="secondary">{{ resolution.positive_action }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+        </table>
+    </div>
+    <footer>
+        <div class="horizontal-line"></div>
+        <slogan>EPIC resolutions. A clear path to action for anyone looking to make a difference.</p>
+    </footer>
 </body>
 
 </html>
