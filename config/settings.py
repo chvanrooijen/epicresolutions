@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
-os.add_dll_directory(r"C:\msys64\mingw64\bin")
+# Check if the Python version is 3.8 or later before calling os.add_dll_directory
+if sys.version_info >= (3, 8):
+    os.add_dll_directory(r"C:\msys64\mingw64\bin")
+else:
+    print("Warning: os.add_dll_directory is not available in this Python version")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
