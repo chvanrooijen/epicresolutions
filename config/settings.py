@@ -14,6 +14,11 @@ import os
 import sys
 from pathlib import Path
 
+# Load the WEASYPRINT_DLL_DIRECTORIES environment variable
+dll_directories = os.getenv("WEASYPRINT_DLL_DIRECTORIES")
+if dll_directories:
+    os.environ["WEASYPRINT_DLL_DIRECTORIES"] = dll_directories
+
 # Check if the Python version is 3.8 or later before calling os.add_dll_directory
 if sys.version_info >= (3, 8):
     os.add_dll_directory(r"C:\msys64\mingw64\bin")
@@ -22,7 +27,6 @@ else:
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -34,7 +38,6 @@ SECRET_KEY = "django-insecure-)8fxvqb$*dvsoo$=7z#l@-rolwb(tmh07j0b0x5iwf%w+)#53c
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -49,7 +52,7 @@ INSTALLED_APPS = [
     "pages",
     "posts",
     "search",
-    ]
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -81,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -91,7 +93,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,7 +112,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -122,7 +122,6 @@ TIME_ZONE = "Europe/Amsterdam"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -138,6 +137,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import os
-if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
+# Import production settings if running on Azure
+if 'WEBSITE_HOSTNAME' in os.environ:  # Running on Azure
     from .production import *

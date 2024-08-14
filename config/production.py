@@ -1,9 +1,22 @@
 import os
+import sys
+from pathlib import Path
 
 from .settings import *  # noqa
 from .settings import BASE_DIR
 
 import logging
+
+# Load the WEASYPRINT_DLL_DIRECTORIES environment variable
+dll_directories = os.getenv("WEASYPRINT_DLL_DIRECTORIES")
+if dll_directories:
+    os.environ["WEASYPRINT_DLL_DIRECTORIES"] = dll_directories
+
+# Check if the Python version is 3.8 or later before calling os.add_dll_directory
+if sys.version_info >= (3, 8):
+    os.add_dll_directory(r"C:\msys64\mingw64\bin")
+else:
+    print("Warning: os.add_dll_directory is not available in this Python version")
 
 # Configure logging
 LOGGING = {
@@ -63,12 +76,12 @@ DATABASES = {
 }
 
 CACHES = {
-        "default": {  
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": os.environ.get('AZURE_REDIS_CONNECTIONSTRING'),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-                "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.environ.get('AZURE_REDIS_CONNECTIONSTRING'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
         },
     }
 }
