@@ -7,19 +7,6 @@ from .settings import BASE_DIR
 
 import logging
 
-# Load the WEASYPRINT_DLL_DIRECTORIES environment variable
-dll_directories = os.getenv("WEASYPRINT_DLL_DIRECTORIES")
-
-if dll_directories:
-    # If WEASYPRINT_DLL_DIRECTORIES is set, use it
-    os.environ["WEASYPRINT_DLL_DIRECTORIES"] = dll_directories
-else:
-    # If not set, use os.add_dll_directory if Python version is 3.8 or later
-    if sys.version_info >= (3, 8):
-        os.add_dll_directory(r"C:\msys64\mingw64\bin")
-    else:
-        print("Warning: os.add_dll_directory is not available in this Python version")
-    
 # Configure logging
 LOGGING = {
     'version': 1,
