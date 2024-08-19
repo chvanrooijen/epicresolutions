@@ -255,7 +255,6 @@ form input[type="submit"]:hover,
     display: flex;
     align-items: center;
     border-radius: 0;
-    /* Add border-radius here */
     overflow: hidden;
     /* Ensure child elements respect the border-radius */
 }
