@@ -9,7 +9,7 @@ from .forms import RoleForm, CauseForm
 from .models import Role, Cause, Resolution
 from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
-from weasyprint import HTML
+from xhtml2pdf import pisa
 from uuid import uuid4
 
 # Create your views here.
@@ -106,6 +106,13 @@ def generate_pdf(request):
     roles = Role.objects.filter(id__in=included_roles_ids)
     resolutions = Resolution.objects.filter(id__in=included_resolutions_ids)
 
+    # Log the types of the data being passed into the table cells
+    for role in roles:
+        print(f"Role: {role.name} (type: {type(role.name)})")
+        for resolution in resolutions:
+            if resolution.role.id == role.id:
+                print(f"Resolution: {resolution.positive_action} (type: {type(resolution.positive_action)})")
+
     # Render the HTML content
     html_content = render_to_string('resolutions/pdf-template.html', {'roles': roles, 'resolutions': resolutions})
 
@@ -117,15 +124,23 @@ def generate_pdf(request):
     fd, path = tempfile.mkstemp()
     try:
         # Generate PDF and save to the temporary file
-        HTML(string=html_content).write_pdf(path)
+        with open(path, 'w+b') as pdf_file:
+            pisa_status = pisa.CreatePDF(html_content, dest=pdf_file)
+            pdf_file.seek(0)
+            response.write(pdf_file.read())
 
-        # Read the PDF content
-        with open(path, 'rb') as f:
-            response.write(f.read())
+            # Check for errors in PDF generation
+            if pisa_status.err:
+                raise Exception("Error generating PDF")
+
+    except Exception as e:
+        # Log the error and HTML content for debugging
+        print(f"Error generating PDF: {e}")
+        print(f"HTML content: {html_content}")
+        return HttpResponse("There was an error generating the PDF.", status=500)
+
     finally:
         os.close(fd)  # Close the file descriptor
         os.remove(path)  # Delete the temporary file
 
     return response
-
-
