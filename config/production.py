@@ -5,13 +5,9 @@ from .settings import BASE_DIR
 
 # Configure the domain name using the environment variable
 # that Azure automatically creates for us.
-ALLOWED_HOSTS = [
-    'epicresolutions-axfrcbd9angucma4.westeurope-01.azurewebsites.net'
-] + ([os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else [])
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://epicresolutions-axfrcbd9angucma4.westeurope-01.azurewebsites.net'
-] + (['https://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else [])
+CSRF_TRUSTED_ORIGINS = ['https://'+ os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 

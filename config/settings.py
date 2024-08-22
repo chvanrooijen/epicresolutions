@@ -101,16 +101,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-CACHES = {
-        "default": {  
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": os.environ.get('CACHELOCATION'),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        },
-    }
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -136,6 +126,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-import os
 if 'WEBSITE_HOSTNAME' in os.environ: # Running on Azure
     from .production import *
