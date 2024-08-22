@@ -13,6 +13,8 @@ CSRF_TRUSTED_ORIGINS = [
     'https://epicresolutions-axfrcbd9angucma4.westeurope-01.azurewebsites.net'
 ] + (['https://' + os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else [])
 
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 DEBUG = False
 
 # WhiteNoise configuration
