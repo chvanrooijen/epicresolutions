@@ -1,0 +1,475 @@
+/* Global Variables */
+:root {
+    --primary-color: rgb(255, 255, 255);
+    --secondary-color: rgb(34, 30, 31);
+    --tertiary-color: rgb(170, 191, 170);
+    --quaternary-color: rgb(42, 95, 85);
+    --quinary-color: rgb(233, 233, 233);
+}
+
+/* Reset & Base Styles */
+html {
+    height: 100%;
+    font-size: 16px;
+    overflow-y: scroll;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+/* Responsive Grid System */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Responsive Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+    .nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer {
+        padding: 20px;
+    }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer {
+        padding: 15px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .footer {
+        padding: 10px;
+    }
+}
+
+/* Header */
+/* Placeholder for header styles */
+
+/* Navigation */
+.nav {
+    background-color: var(--quaternary-color);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.nav a,
+.nav ul li a {
+    text-decoration: none;
+    /* Remove underline from all links */
+    color: inherit;
+    /* Inherit color from .nav */
+    font-size: inherit;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.nav ul {
+    list-style: none;
+    /* Remove bullet points */
+    display: flex;
+    align-items: center;
+    padding: 0;
+    /* Remove padding */
+    margin: 0;
+    /* Remove margin */
+}
+
+.nav a img {
+    height: 21px;
+    /* Logo height */
+    width: auto;
+    /* Maintain aspect ratio */
+    vertical-align: middle;
+}
+
+.nav ul li {
+    margin-right: 20px;
+    /* Consistent margin for list items */
+}
+
+/* Text Styles */
+h1,
+h2,
+h3,
+p,
+small,
+.foreground-text {
+    color: var(--secondary-color);
+}
+
+ol,
+ul {
+    padding-left: 0;
+    /* Or a small value like 10px if you want a slight indent */
+}
+
+li {
+    list-style-position: inside;
+    /* Ensures the bullet or number is aligned with the text */
+}
+
+li>p {
+    margin-top: 1.5px;
+    /* Reduces the space above the <p> element */
+    text-indent: -1em;
+    /* Adjust this value as needed to align with the <li> text */
+    padding-left: 2.4em;
+    /* Compensate for the negative indent, adjust as needed */
+}
+
+/* Table Styles */
+
+table {
+    position: relative;
+    margin-bottom: 20px;
+    /* Space between the table and any content below */
+}
+
+table::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    /* Indent from the left */
+    right: 0;
+    /* Stretch to the right edge */
+    bottom: 0;
+    /* Align to the bottom */
+    height: 2px;
+    /* Height of the border */
+    background-color: var(--quaternary-color);
+    /* Color of the border */
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+th.primary {
+    background-color: var(--quaternary-color);
+    color: var(--primary-color);
+}
+
+th.secondary {
+    background-color: var(--tertiary-color);
+    color: var(--secondary-color);
+}
+
+td.secondary {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+/* General Form Styles */
+form {
+    margin-bottom: 0;
+}
+
+form input[type="text"],
+form input[type="submit"],
+form textarea,
+.search-input,
+.search-button,
+.comment-input,
+.comment-button {
+    padding: 5px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 0;
+    font-size: 1em;
+    font-family: inherit;
+    /* Ensure consistent font family */
+}
+
+form input[type="submit"],
+.search-button,
+.comment-button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form input[type="submit"]:hover,
+.search-button:hover,
+.comment-button:hover {
+    opacity: 0.7;
+}
+
+/* Specific Styles for Search Form */
+.search-form {
+    display: flex;
+    align-items: center;
+    border-radius: 0;
+    overflow: hidden;
+    /* Ensure child elements respect the border-radius */
+}
+
+.input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    width: 100%;
+    padding: 5px 40px 5px 10px;
+    border: none !important;
+    font-size: 1em;
+}
+
+.search-button {
+    position: absolute;
+    right: 5px;
+    top: 38%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--quaternary-color);
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.search-button i {
+    margin: 0;
+}
+
+/* Specific Styles for Comment Form */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-input {
+    width: 100%;
+    height: 100px;
+    /* Adjust height as needed */
+    padding: 10px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 10px;
+    font-family: inherit;
+    /* Ensure consistent font family */
+}
+
+.comment-button {
+    align-self: flex-end;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+button {
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.7;
+    background-color: var(--primary-color);
+}
+
+/* Container styles */
+.content-container {
+    padding: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    /* Make container fill the width */
+    min-height: 300px;
+    /* Adjust based on your needs */
+    position: relative;
+    padding-right: 35%;
+}
+
+.background-text {
+    font-weight: bold;
+    position: absolute;
+    right: 0;
+    /* Aligns the element to the right */
+    text-align: right;
+    width: 35%;
+    /* Define width to control space */
+    opacity: 0.1;
+    /* Additional styling */
+    max-height: 100%;
+    /* Optional: Sets the maximum height of the element to 100% of its container's height */
+    padding-right: 20px;
+}
+
+.foreground-text {
+    font-size: 20px;
+    z-index: 2;
+    padding-left: 20px;
+    /* Indent text 20px from the left */
+}
+
+.container>.foreground-text:not(:last-child) {
+    margin-bottom: 20px;
+    /* Adjust the value as needed */
+}
+
+/* Additional container-specific background colors */
+.container-primary {
+    background-color: var(--primary-color);
+}
+
+.container-secondary {
+    background-color: var(--quinary-color);
+}
+
+.container-tertiary {
+    background-color: var(--tertiary-color);
+}
+
+.container-quaternary {
+    background-color: var(--quaternary-color);
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--quinary-color);
+    color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Common styles for footer images and links */
+.footer img,
+.footer a {
+    max-height: 20px;
+    width: auto;
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* List styles for footer links and social media links */
+.footer-links ul,
+.social-media-links ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List item styles for footer links and social media links */
+.footer-links ul li,
+.social-media-links ul li {
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* Removes right margin for the last item in the list for both link types */
+.footer-links ul li:last-child,
+.social-media-links ul li:last-child {
+    margin-right: 0;
+}
+
+/* Adds spacing between the image and the text */
+.social-media-links ul li img {
+    margin-right: 7px;
+}
+
+/* Horizontal rule styling */
+.footer hr {
+    width: 100%;
+    margin: 0;
+}
+
+/* Footer paragraph styling */
+.footer p {
+    margin: 10px 10px 0 10px;
+}
+
+.slogan {
+    font-size: 1.0em;
+    font-weight: normal;
+    margin: 10px 0;
+    text-align: center;
+    color: var(--secondary-color);
+}
