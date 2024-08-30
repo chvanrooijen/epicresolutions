@@ -34,9 +34,9 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-)8fxvqb$*dvsoo
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = ['https://rickvanrooijen.eu.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['rickvanrooijen.eu.pythonanywhere.com', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://rickvanrooijen.eu.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['rickvanrooijen.eu.pythonanywhere.com']
 
 # Application definition
 
