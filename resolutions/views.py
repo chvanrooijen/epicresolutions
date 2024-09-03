@@ -57,7 +57,7 @@ def select_resolutions(request):
     roles_with_resolutions = []
     for role in roles:
         # Filter the Resolution instances based on the selected role and causes
-        resolutions = Resolution.objects.filter(role=role, cause__in=causes)
+        resolutions = Resolution.objects.filter(role=role, causes__in=causes).distinct()
         roles_with_resolutions.append(
             {
                 "role": role,
@@ -82,7 +82,7 @@ def personal_list(request):
         request.session['included_resolutions_ids'] = included_resolutions
 
         roles = Role.objects.filter(id__in=included_roles)
-        resolutions = Resolution.objects.filter(id__in=included_resolutions)
+        resolutions = Resolution.objects.filter(id__in=included_resolutions).distinct()
 
         return render(
             request,
@@ -100,7 +100,7 @@ def generate_pdf(request):
 
     # Fetch Role and Resolution instances based on retrieved IDs
     roles = Role.objects.filter(id__in=included_roles_ids)
-    resolutions = Resolution.objects.filter(id__in=included_resolutions_ids)
+    resolutions = Resolution.objects.filter(id__in=included_resolutions_ids).distinct()
 
     # Render the HTML content
     html_content = render_to_string('resolutions/pdf-template.html', {'roles': roles, 'resolutions': resolutions})

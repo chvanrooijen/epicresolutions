@@ -18,7 +18,7 @@ class Cause(models.Model):
 
 class Resolution(models.Model):
     role = models.ForeignKey(Role, on_delete=models.CASCADE)
-    cause = models.ForeignKey(Cause, on_delete=models.CASCADE)
+    causes = models.ManyToManyField(Cause)
     positive_action = models.CharField(max_length=200)
     trigger = models.CharField(max_length=200)
     goal = models.CharField(max_length=200)
