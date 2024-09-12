@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>{{ category }}</h1>
-{% for post in object_list %}
-<div style="margin-bottom: 35px;"> <!-- Increase space between posts -->
-    <small style="display: block; margin-bottom: -10px;">
-        {{ post.created_on|date:"F d, Y" }} | Categories:
-        {% for category in post.categories.all %}
-        <a href="{% url 'posts:category_filter' category.pk %}">{{ category.name }}</a>{% if not forloop.last %},
-        {% endif %}
-        {% endfor %}
-    </small>
-    <!-- Decrease space between categories/date and title -->
-    <h2><a href="{% url 'posts:post_detail' post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.content | striptags | safe | slice:":400" }}</p>
+<div class="content-container">
+    <h1>{{ category }}</h1>
+    {% for post in object_list %}
+    <div style="margin-bottom: 35px;"> <!-- Increase space between posts -->
+        <small style="display: block; margin-bottom: -10px;">
+            {{ post.created_on|date:"F d, Y" }} | Categories:
+            {% for category in post.categories.all %}
+            <a href="{% url 'posts:category_filter' category.pk %}">{{ category.name }}</a>{% if not forloop.last %},
+            {% endif %}
+            {% endfor %}
+        </small>
+        <!-- Decrease space between categories/date and title -->
+        <h2><a href="{% url 'posts:post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <p>{{ post.content | striptags | safe | slice:":400" }}</p>
+    </div>
+    {% endfor %}
 </div>
-{% endfor %}
-
 {% endblock %}
