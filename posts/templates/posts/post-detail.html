@@ -9,8 +9,10 @@
     <form method="post" class="comment-form">
         {% csrf_token %}
         <h2>Leave a comment</h2>
-        {{ comment_form.as_p }}
-        <button type="submit" class="comment-button">Submit</button>
+        <div class="comment-input-container">
+            {{ comment_form.as_p }}
+            <button type="submit" class="comment-button">Submit</button>
+        </div>
     </form>
     <h2>Comments</h2>
     {% for comment in comments %}
