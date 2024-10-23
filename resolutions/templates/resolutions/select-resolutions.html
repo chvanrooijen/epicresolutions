@@ -15,15 +15,20 @@
       {% for role_with_resolutions in roles_with_resolutions %}
       <tr class="role-row" data-role-id="{{ role_with_resolutions.role.id }}">
         <th class="secondary">{{ role_with_resolutions.role.name }}</th>
-        <th class="secondary" , style="text-align: center;">
+        <th class="secondary" style="text-align: center;">
           <input type="checkbox" class="role-checkbox" name="include_role" value="{{ role_with_resolutions.role.id }}"
             checked>
         </th>
       </tr>
       {% for resolution in role_with_resolutions.resolutions %}
       <tr class="resolution-row" data-role-id="{{ role_with_resolutions.role.id }}">
-        <td class="secondary">{{ resolution.positive_action }}</td>
-        <td class="secondary" , style="text-align: center;">
+        <td class="secondary">
+          <details>
+            <summary>{{ resolution.positive_action }}</summary>
+            <p>{{ resolution.to_sentence }}</p>
+          </details>
+        </td>
+        <td class="secondary" style="text-align: center;">
           <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}"
             checked>
         </td>
