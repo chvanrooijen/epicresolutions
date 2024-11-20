@@ -13,9 +13,8 @@
 <body>
     <nav class="nav">
         <ul>
-            <li><a href="{% url 'home' %}">
-                    <img src="{% static 'images/EPIC White logo Transparent bg.svg' %}" alt="Website Logo">
-                </a></li>
+            <li><a href="{% url 'home' %}"><img src="{% static 'images/EPIC White logo Transparent bg.svg' %}"
+                        alt="Website Logo"></a></li>
             <li><a href="{% url 'posts:post_list' %}">News</a></li>
             <li><a href="{% url 'resolutions:select_roles' %}">Resolutions</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
@@ -51,18 +50,12 @@
             </div>
             <div class="social-media-links">
                 <ul>
-                    <li>
-                        <a href="https://mastodon.social/@epicresolutions" rel="me"><img
-                                src="{% static 'images/mastodon_logo.svg' %}" alt="Mastodon">Mastodon</a>
-                    </li>
-                    <li>
-                        <a href="https://www.linkedin.com/company/epicresolutions/"><img
-                                src="{% static 'images/linkedin_logo.svg' %}" alt="LinkedIn">LinkedIn</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/chvanrooijen/epicresolutions"><img
-                                src="{% static 'images/github_logo.svg' %}" alt="GitHub">GitHub</a>
-                    </li>
+                    <li><a href="https://mastodon.social/@epicresolutions" rel="me"><img
+                                src="{% static 'images/mastodon_logo.svg' %}" alt="Mastodon"> Mastodon</a></li>
+                    <li><a href="https://www.linkedin.com/company/epicresolutions/"><img
+                                src="{% static 'images/linkedin_logo.svg' %}" alt="LinkedIn"> LinkedIn</a></li>
+                    <li><a href="https://github.com/chvanrooijen/epicresolutions"><img
+                                src="{% static 'images/github_logo.svg' %}" alt="GitHub"> GitHub</a></li>
                 </ul>
             </div>
         </div>

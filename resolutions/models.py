@@ -37,11 +37,17 @@ class Resolution(models.Model):
     def capitalize_sentence(self, sentence):
         return sentence[0].upper() + sentence[1:]
 
+    def capitalize_i(self, sentence):
+        words = sentence.split()
+        capitalized_words = [word if word.lower() != 'i' else 'I' for word in words]
+        return ' '.join(capitalized_words)
+
     def to_sentence(self):
         causes = ', '.join(cause.name.lower() for cause in self.causes.all())
         article = self.get_article(self.role.name.lower())
-        sentence = (f"As {article} {self.role.name.lower()}, I {self.positive_action.lower()}, "
+        sentence = (f"As {article} {self.role.name.lower()}, i {self.positive_action.lower()}, "
                     f"when {self.trigger.lower()}, to {self.goal.lower()}, and {self.incentive.lower()}, "
                     f"rather than {self.negative_action.lower()}. "
                     f"Causes: {causes}.")
-        return self.capitalize_sentence(sentence)
+        sentence = self.capitalize_sentence(sentence)
+        return self.capitalize_i(sentence)
