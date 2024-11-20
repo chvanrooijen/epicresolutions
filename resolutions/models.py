@@ -1,4 +1,5 @@
 from django.db import models
+import re
 
 
 # Create your models here.
@@ -38,15 +39,14 @@ class Resolution(models.Model):
         return sentence[0].upper() + sentence[1:]
 
     def capitalize_i(self, sentence):
-        words = sentence.split()
-        capitalized_words = [word if word.lower() != 'i' else 'I' for word in words]
-        return ' '.join(capitalized_words)
+        # Use regex to find standalone "i" and capitalize it, including cases with contractions
+        return re.sub(r'\bi\b(?=\s|$|\'m|\'ve|\'ll|\'d|\'re|\'s|\'t)', 'I', sentence)
 
     def to_sentence(self):
         causes = ', '.join(cause.name.lower() for cause in self.causes.all())
         article = self.get_article(self.role.name.lower())
         sentence = (f"As {article} {self.role.name.lower()}, i {self.positive_action.lower()}, "
-                    f"when {self.trigger.lower()}, to {self.goal.lower()}, and {self.incentive.lower()}, "
+                    f"{self.trigger.lower()}, to {self.goal.lower()}, and {self.incentive.lower()}, "
                     f"rather than {self.negative_action.lower()}. "
                     f"Causes: {causes}.")
         sentence = self.capitalize_sentence(sentence)
