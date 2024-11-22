@@ -18,6 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    line-height: 1.5;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -58,6 +59,11 @@ img {
     .nav {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
     }
 
     .footer {
@@ -123,7 +129,7 @@ img {
 }
 
 .nav a img {
-    height: 21px;
+    height: 26px;
     /* Logo height */
     width: auto;
     /* Maintain aspect ratio */
@@ -205,7 +211,7 @@ th.primary {
 
 th.secondary {
     background-color: var(--tertiary-color);
-    color: var(--secondary-color);
+    color: var (--secondary-color);
 }
 
 td.secondary {
@@ -309,7 +315,7 @@ form input[type="submit"]:hover,
     height: 100px;
     /* Adjust height as needed */
     padding: 10px;
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var (--secondary-color);
     border-radius: 0;
     font-size: 1em;
     font-family: inherit;
@@ -389,6 +395,15 @@ button:hover {
     max-height: 100%;
     /* Optional: Sets the maximum height of the element to 100% of its container's height */
     padding-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    /* Ensure it is lower than the footer's z-index */
+    margin-bottom: 20px;
+    /* Add space below the element */
 }
 
 .foreground-text {
@@ -429,6 +444,9 @@ button:hover {
     align-items: center;
     padding: 10px 20px;
     text-align: center;
+    position: relative;
+    z-index: 2;
+    /* Ensure it is higher than .background-text */
 }
 
 .footer-content {
@@ -456,6 +474,8 @@ button:hover {
     list-style: none;
     padding: 0;
     margin: 0;
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
 }
 
 /* List item styles for footer links and social media links */
@@ -475,6 +495,31 @@ button:hover {
 /* Adds spacing between the image and the text */
 .social-media-links ul li img {
     margin-right: 7px;
+    max-width: 100%;
+    /* Ensure images are responsive */
+    height: auto;
+    /* Maintain aspect ratio */
+    display: block;
+    /* Remove extra space below images */
+}
+
+/* Additional styles for social media links */
+.social-media-links a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Responsive container for social media links */
+.social-media-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* Space between icons */
+    flex-wrap: wrap;
+    /* Allow wrapping on smaller screens */
 }
 
 /* Horizontal rule styling */
