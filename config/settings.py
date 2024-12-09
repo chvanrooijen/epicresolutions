@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "pages",
     "posts",
     "search",
+    "dashboard",
 ]
 
 MIDDLEWARE = [

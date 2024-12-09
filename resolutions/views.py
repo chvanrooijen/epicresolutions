@@ -7,6 +7,7 @@ from django.http import JsonResponse, HttpResponse
 from django.template.loader import render_to_string
 from weasyprint import HTML
 from uuid import uuid4
+from dashboard.models import PDFDownloadLog
 
 # Create your views here.
 def select_roles(request):
@@ -101,6 +102,12 @@ def generate_pdf(request):
     # Fetch Role and Resolution instances based on retrieved IDs
     roles = Role.objects.filter(id__in=included_roles_ids)
     resolutions = Resolution.objects.filter(id__in=included_resolutions_ids).distinct()
+
+    # Log the PDF download
+    log = PDFDownloadLog.objects.create()
+    log.roles.set(roles)
+    log.resolutions.set(resolutions)
+    log.save()
 
     # Render the HTML content
     html_content = render_to_string('resolutions/pdf-template.html', {'roles': roles, 'resolutions': resolutions})

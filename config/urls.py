@@ -24,4 +24,5 @@ urlpatterns = [
     path("resolutions/", include("resolutions.urls")),
     path("posts/", include("posts.urls")),
     path("search/", include("search.urls")),
+    path("dashboard/", include("dashboard.urls")),
 ]

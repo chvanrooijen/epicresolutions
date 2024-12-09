@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-container">
+    <h1>PDF Downloads Dashboard</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
+
+    <h2>Downloads by Date</h2>
+    <table id="downloadsTable">
+        <thead>
+            <tr>
+                <th class="primary">Date</th>
+                <th class="primary right-align">Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for download in downloads_by_date %}
+            <tr>
+                <td>{{ download.date }}</td>
+                <td class="right-align">{{ download.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Roles Count</h2>
+    <table id="rolesTable">
+        <thead>
+            <tr>
+                <th class="primary" onclick="sortTable(0, 'rolesTable')">Role</th>
+                <th class="primary right-align" onclick="sortTable(1, 'rolesTable')">Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in roles_count %}
+            <tr>
+                <td>{{ role.roles__name }}</td>
+                <td class="right-align">{{ role.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Resolutions Count</h2>
+    <table id="resolutionsTable">
+        <thead>
+            <tr>
+                <th class="primary" onclick="sortTable(0, 'resolutionsTable')">Resolution</th>
+                <th class="primary right-align" onclick="sortTable(1, 'resolutionsTable')">Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for resolution in resolutions_count %}
+            <tr>
+                <td>{{ resolution.resolutions__positive_action }}</td>
+                <td class="right-align">{{ resolution.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function sortTable(columnIndex, tableId) {
+            var table = document.getElementById(tableId);
+            var rows = Array.from(table.rows).slice(1);
+            var isAsc = table.rows[0].cells[columnIndex].classList.toggle('sort-asc');
+            table.rows[0].cells[columnIndex].classList.toggle('sort-desc', !isAsc);
+
+            rows.sort(function (rowA, rowB) {
+                var cellA = rowA.cells[columnIndex].innerText;
+                var cellB = rowB.cells[columnIndex].innerText;
+                return isAsc ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+            });
+
+            rows.forEach(function (row) {
+                table.tBodies[0].appendChild(row);
+            });
+        }
+    </script>
+</div>
+{% endblock %}
