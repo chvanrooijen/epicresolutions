@@ -8,7 +8,12 @@
         <small style="display: block; margin-bottom: -10px;">
             {{ post.created_on|date:"F d, Y" }} | Categories:
             {% for category in post.categories.all %}
-            <a href="{% url 'posts:category_filter' category.pk %}">{{ category.name }}</a>{% if not forloop.last %},
+            {% if category.slug %}
+            <a href="{% url 'posts:category_filter' category.slug %}">{{ category.name }}</a>{% if not forloop.last %},
+            {% endif %}
+            {% else %}
+            <a href="{% url 'posts:category_filter_pk' category.pk %}">{{ category.name }}</a>{% if not forloop.last %},
+            {% endif %}
             {% endif %}
             {% endfor %}
         </small>

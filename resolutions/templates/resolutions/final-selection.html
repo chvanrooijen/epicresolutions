@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Final Selection{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            <h2 class="mb-4">Step 3: Final Selection</h2>
+            
+            <p class="lead mb-4">
+                Review and select the roles and resolutions you want to include in your personal list.
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for role_data in roles_with_resolutions %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <div class="form-check">
+                                <input class="form-check-input role-checkbox" type="checkbox" 
+                                       name="include_role_{{ role_data.role.id }}" 
+                                       id="role_{{ role_data.role.id }}" 
+                                       checked 
+                                       data-role-id="{{ role_data.role.id }}">
+                                <label class="form-check-label fw-bold" for="role_{{ role_data.role.id }}">
+                                    {{ role_data.role.name }}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% for resolution in role_data.resolutions %}
+                                <div class="form-check mb-2 resolution-check" data-role-id="{{ role_data.role.id }}">
+                                    <input class="form-check-input resolution-checkbox" type="checkbox" 
+                                           name="include_resolution_{{ resolution.id }}" 
+                                           id="resolution_{{ resolution.id }}" 
+                                           checked>
+                                    <label class="form-check-label" for="resolution_{{ resolution.id }}">
+                                        {{ resolution.display_label }}
+                                    </label>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'resolutions:role_selection' %}" class="btn btn-secondary btn-lg">
+                        &lt;&lt; Back
+                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Next &gt;&gt;
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle role checkbox changes
+    document.querySelectorAll('.role-checkbox').forEach(function(roleCheckbox) {
+        roleCheckbox.addEventListener('change', function() {
+            const roleId = this.dataset.roleId;
+            const resolutionCheckboxes = document.querySelectorAll(`.resolution-check[data-role-id="${roleId}"] .resolution-checkbox`);
+            
+            resolutionCheckboxes.forEach(function(resCheckbox) {
+                resCheckbox.disabled = !roleCheckbox.checked;
+                if (!roleCheckbox.checked) {
+                    resCheckbox.checked = false;
+                }
+            });
+        });
+    });
+});
+</script>
+
+<style>
+.form-check {
+    padding: 0.5rem;
+}
+
+.card-header .form-check {
+    margin-bottom: 0;
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+.resolution-check {
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.resolution-check:hover {
+    background-color: #f8f9fa;
+}
+</style>
+{% endblock %}

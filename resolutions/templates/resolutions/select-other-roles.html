@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-container">
+  <form method="POST">
+    {% csrf_token %}
+    <p style="margin-left: 0; padding-left: 0;">
+      <label for="form-id">Select the roles you identify with:</label>
+    </p>
+    <table style="margin-left: 0; padding-left: 0;">
+      <tr>
+        <th class="primary">Role</th>
+        <th class="primary">Include</th>
+      </tr>
+      {% for role in all_roles %}
+        <tr {% if role not in available_roles %}class="disabled-row"{% endif %}>
+          <td class="secondary {% if role not in available_roles %}disabled-text{% endif %}">
+            {{ role.name }}
+          </td>
+          <td class="secondary" style="text-align: center;">
+            {% if role in available_roles %}
+              <input type="checkbox" name="roles" value="{{ role.id }}" {% if role.name|lower == 'consumer' %}checked{% endif %}>
+            {% else %}
+              <input type="checkbox" disabled>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+    <button type="button" onclick="window.history.back();">&laquo; Previous</button>
+    <button type="submit">Next &raquo;</button>
+  </form>
+</div>
+
+<style>
+.disabled-row {
+  opacity: 0.5;
+}
+
+.disabled-text {
+  color: #999 !important;
+}
+</style>
+{% endblock %}

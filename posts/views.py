@@ -34,8 +34,17 @@ class PostDetailView(DetailView):
             return self.render_to_response(context)
 
 
-def category_filter(request, pk):
-    # Fetch the category by its primary key (pk)
+def category_filter(request, slug):
+    # Fetch the category by its slug
+    category = get_object_or_404(Category, slug=slug)
+    # Filter posts by the selected category
+    posts = Post.objects.filter(categories=category)
+    # Render the template with the filtered posts and the category
+    return render(request, 'posts/category-filter.html', {'object_list': posts, 'category': category})
+
+
+def category_filter_pk(request, pk):
+    # Fetch the category by its pk (fallback for categories without slugs)
     category = get_object_or_404(Category, pk=pk)
     # Filter posts by the selected category
     posts = Post.objects.filter(categories=category)

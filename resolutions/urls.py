@@ -4,9 +4,11 @@ from . import views
 app_name = "resolutions"
 
 urlpatterns = [
-    path("select-roles/", views.select_roles, name="select_roles"),
-    path("select-causes/", views.select_causes, name="select_causes"),
-    path("select-resolutions/", views.select_resolutions, name="select_resolutions"),
-    path("personal-list/", views.personal_list, name="personal_list"),
+    # New workflow
+    path("", views.introduction, name="introduction"),
+    path("consumer-resolutions/", views.select_consumer_resolutions, name="select_consumer_resolutions"),
+    path("roles/", views.select_other_roles, name="select_other_roles"),
+    path("applicable-resolutions/", views.further_personalise_list, name="further_personalise_list"),
+    path("personal-list/", views.personal_list_new, name="personal_list_new"),
     path("generate-pdf/", views.generate_pdf, name="generate_pdf"),
 ]

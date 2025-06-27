@@ -7,17 +7,15 @@
     <tr>
       <th class="primary">My resolutions</th>
     </tr>
-    {% for role in roles %}
-    <tr>
-      <th class="secondary">{{ role.name }}</th>
-    </tr>
-    {% for resolution in resolutions %}
-    {% if resolution.role.id == role.id %}
-    <tr>
-      <td class="secondary">{{ resolution.positive_action }}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
+    {% for role_data in roles_with_resolutions %}
+      <tr>
+        <th class="secondary">{{ role_data.role.name }}</th>
+      </tr>
+      {% for resolution in role_data.resolutions %}
+        <tr>
+          <td class="secondary">{{ resolution.display_label }}</td>
+        </tr>
+      {% endfor %}
     {% endfor %}
   </table>
 
@@ -26,10 +24,10 @@
     <button onclick="generatePDF()">Download PDF</button>
   </div>
 </div>
+
 <script>
   function generatePDF() {
     window.location.href = '{% url "resolutions:generate_pdf" %}';
   }
 </script>
-
 {% endblock %}

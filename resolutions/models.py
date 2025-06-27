@@ -13,6 +13,16 @@ class Role(models.Model):
         ordering = ['name'] # order by name
 
 
+class Domain(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
+
 class Cause(models.Model):
     name = models.CharField(max_length=200)
 
@@ -28,10 +38,18 @@ class Resolution(models.Model):
     goal = models.CharField(max_length=200)
     incentive = models.CharField(max_length=200)
     negative_action = models.CharField(max_length=200)
+    domain = models.ForeignKey(Domain, on_delete=models.CASCADE, null=True, blank=True)
+    label = models.CharField(max_length=200, blank=True)  # User-friendly label
+    related_resolutions = models.ManyToManyField('self', blank=True, symmetrical=False)
 
     def __str__(self):
-        return self.positive_action
+        return self.label if self.label else self.positive_action
     
+    @property
+    def display_label(self):
+        """Return the label if available, otherwise use positive_action"""
+        return self.label if self.label else self.positive_action
+
     def get_article(self, word):
         return 'an' if word[0].lower() in 'aeiou' else 'a'
 

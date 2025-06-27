@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content-container">
+  <form method="POST">
+    {% csrf_token %}
+    <p style="margin-left: 0; padding-left: 0;">
+      <label for="form-id">Select the resolutions you want to do or keep doing as a consumer:</label>
+    </p>
+    
+    <table style="margin-left: 0; padding-left: 0;">
+      <tr>
+        <th class="primary">Domains and resolutions</th>
+        <th class="primary">Include</th>
+      </tr>
+      {% for domain_data in domains_with_resolutions %}
+        <tr class="domain-row" data-domain-name="{{ domain_data.domain }}">
+          <th class="secondary">{{ domain_data.domain }}</th>
+          <th class="secondary" style="text-align: center;">
+            <input type="checkbox" class="domain-checkbox" name="include_domain" value="{{ domain_data.domain }}" checked>
+          </th>
+        </tr>
+        {% for resolution in domain_data.resolutions %}
+          <tr class="resolution-row" data-domain-name="{{ domain_data.domain }}">
+            <td class="secondary">
+              <details>
+                <summary>{{ resolution.display_label }}</summary>
+                <p>{{ resolution.to_sentence }}</p>
+              </details>
+            </td>
+            <td class="secondary" style="text-align: center;">
+              <input type="checkbox" class="resolution-checkbox" name="include_resolution" value="{{ resolution.id }}" checked>
+            </td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </table>
+    
+    <button type="submit">Next &raquo;</button>
+  </form>
+</div>
+
+<script>
+  document.querySelectorAll('.domain-checkbox').forEach(function (domainCheckbox) {
+    domainCheckbox.addEventListener('change', function () {
+      var domainName = this.closest('.domain-row').dataset.domainName;
+      document.querySelectorAll('.resolution-row[data-domain-name="' + domainName + '"] .resolution-checkbox').forEach(function (resolutionCheckbox) {
+        resolutionCheckbox.checked = domainCheckbox.checked;
+      });
+    });
+  });
+
+  document.querySelectorAll('.resolution-checkbox').forEach(function (resolutionCheckbox) {
+    resolutionCheckbox.addEventListener('change', function () {
+      var domainName = this.closest('.resolution-row').dataset.domainName;
+      var allUnchecked = true;
+      document.querySelectorAll('.resolution-row[data-domain-name="' + domainName + '"] .resolution-checkbox').forEach(function (checkbox) {
+        if (checkbox.checked) {
+          allUnchecked = false;
+        }
+      });
+      document.querySelector('.domain-row[data-domain-name="' + domainName + '"] .domain-checkbox').checked = !allUnchecked;
+    });
+  });
+</script>
+{% endblock %}

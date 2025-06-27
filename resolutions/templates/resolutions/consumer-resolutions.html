@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Select Your Resolutions{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4">Step 1: Select Your Consumer Resolutions</h2>
+            
+            <p class="lead mb-4">
+                Choose the resolutions you want to do or keep doing. Resolutions are grouped by domain to help you find what's relevant to you.
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">{{ field.label }}</h5>
+                        </div>
+                        <div class="card-body">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <div class="d-flex justify-content-between mt-4">
+                    <div></div> <!-- Empty div for spacing -->
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Next &gt;&gt;
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-check {
+    margin-bottom: 0.5rem;
+}
+
+.form-check-label {
+    font-weight: normal;
+}
+
+.card-header h5 {
+    color: #495057;
+}
+</style>
+{% endblock %}
