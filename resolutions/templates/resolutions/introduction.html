@@ -2,20 +2,25 @@
 
 {% block content %}
 <div class="content-container">
-  <h2>Build Your Personal Resolution List</h2>
-  
+  <h1>Build Your Personal Resolution List</h1>
+
   <p>Welcome! This tool will help you create a personalized list of resolutions based on your role and interests.</p>
-  
-  <h3>How it works:</h3>
+
+  <h2>How it works:</h2>
   <ol>
-    <li><strong>Select Consumer Resolutions:</strong> Choose the resolutions you want to do or keep doing as a consumer, organized by domain (e.g., Food, Travel, Living).</li>
-    <li><strong>Select Your Roles:</strong> Identify the roles that apply to you. Only roles with relevant resolutions will be available for selection.</li>
-    <li><strong>Customize Your List:</strong> Fine-tune your selection by choosing which roles and resolutions to include in your final list.</li>
-    <li><strong>Download Your List:</strong> Get your personalized resolution list as a PDF for offline reference or printing.</li>
+    <li><strong>Select Consumer Resolutions:</strong> Choose the resolutions you want to do or keep doing as a consumer,
+      organized by domain (e.g., Food, Travel, Living).</li>
+    <li><strong>Select Your Roles:</strong> Identify the roles that apply to you. Only roles with relevant resolutions
+      will be available for selection.</li>
+    <li><strong>Customize Your List:</strong> Fine-tune your selection by choosing which roles and resolutions to
+      include in your final list.</li>
+    <li><strong>Download Your List:</strong> Get your personalized resolution list as a PDF for offline reference or
+      printing.</li>
   </ol>
-  
-  <p>The process takes just a few minutes and results in a customized action plan tailored to your specific roles and interests.</p>
-  
+
+  <p>The process takes just a few minutes and results in a customized action plan tailored to your specific roles and
+    interests.</p>
+
   <div style="margin-top: 30px;">
     <a href="{% url 'resolutions:select_consumer_resolutions' %}" class="get-started-btn">
       Get Started &raquo;
@@ -24,24 +29,24 @@
 </div>
 
 <style>
-.get-started-btn {
-  background-color: var(--primary-color);
-  border: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
-  padding: 10px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-family: inherit;
-  font-weight: bold;
-  font-size: 1em;
-  margin: 4px 2px;
-  cursor: pointer;
-}
+  .get-started-btn {
+    background-color: var(--primary-color);
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 1em;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
 
-.get-started-btn:hover {
-  opacity: 0.7;
-  background-color: var(--primary-color);
-}
+  .get-started-btn:hover {
+    opacity: 0.7;
+    background-color: var(--primary-color);
+  }
 </style>
 {% endblock %}

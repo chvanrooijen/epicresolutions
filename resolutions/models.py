@@ -64,8 +64,7 @@ class Resolution(models.Model):
         causes = ', '.join(cause.name.lower() for cause in self.causes.all())
         article = self.get_article(self.role.name.lower())
         sentence = (f"As {article} {self.role.name.lower()}, i {self.positive_action.lower()}, "
-                    f"{self.trigger.lower()}, to {self.goal.lower()}, and {self.incentive.lower()}, "
-                    f"rather than {self.negative_action.lower()}. "
-                    f"Causes: {causes}.")
+                    f"{self.trigger.lower()}, to {self.goal.lower()}, while {self.incentive.lower()}, "
+                    f"rather than {self.negative_action.lower()}. ")
         sentence = self.capitalize_sentence(sentence)
         return self.capitalize_i(sentence)
